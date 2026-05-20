@@ -1,19 +1,10 @@
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import Image from "next/image"
-import { ArrowLeft, ArrowRight, CheckCircle, AlertTriangle, Lightbulb, Trophy } from "lucide-react"
+import { ArrowLeft, ArrowRight, Code2, Sparkles } from "lucide-react"
 import { projectDetails } from "@/lib/project-data"
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/contact-section"
-
-const projectImages: Record<string, string> = {
-  "ecommerce-platform": "/images/project-ecommerce.jpg",
-  "fitness-tracker": "/images/project-fitness.jpg",
-  "portfolio-builder": "/images/project-portfolio.jpg",
-  "task-management": "/images/project-tasks.jpg",
-  "weather-dashboard": "/images/project-weather.jpg",
-  "social-media-analytics": "/images/project-analytics.jpg",
-}
 
 interface ProjectPageProps {
   params: Promise<{ id: string }>
@@ -51,7 +42,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     <>
       <Navigation />
       <main className="min-h-screen pt-24 pb-16">
-        <div className="max-w-4xl mx-auto px-6">
+        <div className="max-w-5xl mx-auto px-6">
           {/* Back link */}
           <Link
             href="/#projects"
@@ -76,42 +67,60 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               {project.shortDescription}
             </p>
+            <div className="inline-flex items-center gap-2 mt-4 px-4 py-2 rounded-full bg-card border border-border text-sm text-muted-foreground">
+              <Sparkles size={16} className="text-accent-yellow" />
+              Developed as a fun personal project
+            </div>
           </header>
 
-          {/* Project Visual */}
-          <div
-            className="relative h-64 md:h-96 rounded-2xl mb-12 overflow-hidden"
-          >
-            {projectImages[project.id] ? (
-              <Image
-                src={projectImages[project.id]}
-                alt={project.title}
-                fill
-                className="object-cover"
-              />
-            ) : (
-              <div
-                className="absolute inset-0 flex items-center justify-center"
-                style={{
-                  background: `linear-gradient(135deg, ${project.color}15, ${project.color}05)`,
-                }}
-              >
-                <span
-                  className="text-8xl md:text-9xl font-bold opacity-20"
-                  style={{ color: project.color }}
+          {/* App Screens Gallery */}
+          <section className="mb-16">
+            <h2 className="text-2xl font-semibold mb-8 text-center">App Screens</h2>
+            <div className="space-y-12">
+              {project.screens.map((screen, index) => (
+                <div
+                  key={index}
+                  className="group"
                 >
-                  {String(currentIndex + 1).padStart(2, "0")}
-                </span>
-              </div>
-            )}
-            <div
-              className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent"
-            />
-          </div>
+                  {/* Screen Image */}
+                  <div className="relative aspect-video rounded-2xl overflow-hidden mb-6 border border-border bg-card">
+                    <Image
+                      src={screen.image}
+                      alt={screen.title}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
+                    <div className="absolute bottom-4 left-4 right-4">
+                      <span
+                        className="inline-block px-3 py-1 rounded-full text-xs font-medium"
+                        style={{
+                          backgroundColor: project.color + "30",
+                          color: project.color,
+                        }}
+                      >
+                        Screen {index + 1}
+                      </span>
+                    </div>
+                  </div>
+                  
+                  {/* Screen Info */}
+                  <div className="text-center max-w-3xl mx-auto">
+                    <h3 className="text-xl font-semibold mb-3" style={{ color: project.color }}>
+                      {screen.title}
+                    </h3>
+                    <p className="text-muted-foreground leading-relaxed">
+                      {screen.description}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
 
           {/* Technologies */}
           <section className="mb-12">
-            <h2 className="text-2xl font-semibold mb-4 text-center">Technologies Used</h2>
+            <h2 className="text-2xl font-semibold mb-6 text-center">Technologies Used</h2>
             <div className="flex flex-wrap justify-center gap-3">
               {project.technologies.map((tech) => (
                 <span
@@ -126,65 +135,31 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
           {/* Full Description */}
           <section className="mb-12">
-            <h2 className="text-2xl font-semibold mb-6 text-center">Project Overview</h2>
-            <div className="prose prose-invert max-w-none">
+            <h2 className="text-2xl font-semibold mb-6 text-center">About This Project</h2>
+            <div className="bg-card rounded-2xl p-8 border border-border">
               {project.fullDescription.split("\n\n").map((paragraph, index) => (
-                <p key={index} className="text-muted-foreground leading-relaxed mb-4 text-center">
+                <p key={index} className="text-muted-foreground leading-relaxed mb-4 last:mb-0">
                   {paragraph}
                 </p>
               ))}
             </div>
           </section>
 
-          {/* Challenges & Solutions Grid */}
-          <div className="grid md:grid-cols-2 gap-8 mb-12">
-            {/* Challenges */}
-            <section className="bg-card rounded-2xl p-6 border border-border">
-              <div className="flex items-center gap-3 mb-4">
-                <AlertTriangle className="text-accent-yellow" size={24} />
-                <h2 className="text-xl font-semibold">Challenges</h2>
-              </div>
-              <ul className="space-y-3">
-                {project.challenges.map((challenge, index) => (
-                  <li key={index} className="flex gap-3 text-muted-foreground text-sm">
-                    <span className="text-accent-yellow mt-1">•</span>
-                    {challenge}
-                  </li>
-                ))}
-              </ul>
-            </section>
-
-            {/* Solutions */}
-            <section className="bg-card rounded-2xl p-6 border border-border">
-              <div className="flex items-center gap-3 mb-4">
-                <Lightbulb className="text-accent-green" size={24} />
-                <h2 className="text-xl font-semibold">Solutions</h2>
-              </div>
-              <ul className="space-y-3">
-                {project.solutions.map((solution, index) => (
-                  <li key={index} className="flex gap-3 text-muted-foreground text-sm">
-                    <CheckCircle className="text-accent-green shrink-0 mt-0.5" size={16} />
-                    {solution}
-                  </li>
-                ))}
-              </ul>
-            </section>
-          </div>
-
-          {/* Outcomes */}
-          <section className="bg-card rounded-2xl p-6 border border-border mb-12">
-            <div className="flex items-center justify-center gap-3 mb-6">
-              <Trophy className="text-primary" size={24} />
-              <h2 className="text-xl font-semibold">Results & Outcomes</h2>
-            </div>
+          {/* Key Features */}
+          <section className="mb-12">
+            <h2 className="text-2xl font-semibold mb-6 text-center">Key Features</h2>
             <div className="grid sm:grid-cols-2 gap-4">
-              {project.outcomes.map((outcome, index) => (
+              {project.features.map((feature, index) => (
                 <div
                   key={index}
-                  className="flex items-center gap-3 p-4 rounded-xl bg-muted/50"
+                  className="flex items-start gap-3 p-4 rounded-xl bg-card border border-border"
                 >
-                  <CheckCircle className="text-primary shrink-0" size={20} />
-                  <span className="text-sm text-foreground">{outcome}</span>
+                  <Code2 
+                    className="shrink-0 mt-0.5" 
+                    size={18} 
+                    style={{ color: project.color }} 
+                  />
+                  <span className="text-sm text-foreground">{feature}</span>
                 </div>
               ))}
             </div>

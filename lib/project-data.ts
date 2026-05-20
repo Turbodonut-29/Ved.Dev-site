@@ -1,3 +1,9 @@
+export interface ProjectScreen {
+  image: string
+  title: string
+  description: string
+}
+
 export interface ProjectDetail {
   id: string
   title: string
@@ -6,208 +12,243 @@ export interface ProjectDetail {
   category: string
   color: string
   technologies: string[]
-  challenges: string[]
-  solutions: string[]
-  outcomes: string[]
+  screens: ProjectScreen[]
+  features: string[]
 }
 
 export const projectDetails: ProjectDetail[] = [
   {
     id: "ecommerce-platform",
     title: "E-Commerce Platform",
-    shortDescription: "A full-featured online shopping experience with cart, checkout, and payment integration",
-    fullDescription: `This comprehensive e-commerce platform represents a complete online shopping solution designed to provide users with an intuitive and seamless purchasing experience. The project was conceived with the goal of creating a modern, scalable platform that could handle high traffic volumes while maintaining exceptional performance and user experience.
+    shortDescription: "A full-featured online shopping experience developed as a personal project to explore modern e-commerce patterns",
+    fullDescription: `This e-commerce platform was developed as a fun project to explore the complexities of building a complete online shopping solution. The goal was to challenge myself by implementing features commonly found in production e-commerce sites while learning new technologies and best practices.
 
-The platform features a sophisticated product catalog system that allows for complex categorization, filtering, and search functionality. Users can browse through thousands of products effortlessly, with intelligent filtering options based on price, category, brand, ratings, and availability. The search functionality incorporates fuzzy matching and autocomplete suggestions to help users find exactly what they're looking for.
+The platform features a sophisticated product catalog system with complex categorization, filtering, and search functionality. I implemented fuzzy matching and autocomplete suggestions to create a smooth browsing experience. Building the search system was particularly interesting as it required balancing performance with accuracy.
 
-The shopping cart system was built with persistence in mind, allowing users to save their carts across sessions and devices. Real-time inventory tracking ensures that users are always aware of product availability, with automatic notifications when items in their cart become low in stock. The checkout process was designed to minimize friction, featuring guest checkout options, saved addresses, and multiple payment methods.
+The shopping cart system includes persistence across sessions, real-time inventory tracking, and automatic notifications for low-stock items. I enjoyed building the checkout flow, which minimizes friction with guest checkout options, saved addresses, and multiple payment methods.
 
-Payment integration was implemented using Stripe's API, supporting credit cards, digital wallets, and various regional payment methods. The system includes comprehensive fraud detection, automatic tax calculation based on location, and support for promotional codes and discounts. Order confirmation emails with tracking information keep customers informed throughout the delivery process.`,
+Payment integration using Stripe's API was a great learning experience, covering credit cards, digital wallets, and promotional code handling. This project taught me a lot about secure payment processing and PCI compliance considerations.`,
     category: "Web Development",
     color: "#FFD700",
     technologies: ["React", "Node.js", "MongoDB", "Stripe", "Redis", "AWS S3", "Elasticsearch"],
-    challenges: [
-      "Handling high-volume concurrent transactions during peak shopping periods",
-      "Implementing real-time inventory synchronization across multiple warehouses",
-      "Creating a responsive design that works flawlessly across all device types",
-      "Ensuring PCI compliance for secure payment processing"
+    screens: [
+      {
+        image: "/images/project-ecommerce.jpg",
+        title: "Product Catalog",
+        description: "The main product browsing interface featuring a grid layout with filtering options. Users can sort by price, category, and ratings. The search bar includes autocomplete suggestions powered by Elasticsearch for fast, relevant results."
+      },
+      {
+        image: "/images/ecommerce-cart.jpg",
+        title: "Shopping Cart",
+        description: "The cart page displays all selected items with quantity controls and real-time price calculations. It shows stock availability, estimated shipping costs, and supports promotional codes. The cart persists across sessions using Redis."
+      },
+      {
+        image: "/images/ecommerce-product.jpg",
+        title: "Product Detail Page",
+        description: "Individual product pages feature a large image gallery with zoom capability, detailed specifications, customer reviews section, and related product recommendations. The add-to-cart button includes size/variant selection where applicable."
+      }
     ],
-    solutions: [
-      "Implemented Redis caching and queue systems to handle traffic spikes",
-      "Built a microservices architecture for independent scaling of inventory services",
-      "Used a mobile-first design approach with Tailwind CSS for responsive layouts",
-      "Integrated Stripe Elements for PCI-compliant payment handling"
-    ],
-    outcomes: [
-      "Achieved 99.9% uptime during Black Friday sales events",
-      "Reduced page load times by 60% through optimization",
-      "Increased mobile conversion rates by 45%",
-      "Successfully processed over 10,000 daily transactions"
+    features: [
+      "Full product catalog with advanced filtering and search",
+      "Persistent shopping cart with real-time inventory tracking",
+      "Stripe payment integration with multiple payment methods",
+      "Guest checkout and saved address management",
+      "Order confirmation emails with tracking integration"
     ]
   },
   {
     id: "fitness-tracker",
     title: "Fitness Tracker App",
-    shortDescription: "Mobile-first fitness application with workout tracking and progress analytics",
-    fullDescription: `The Fitness Tracker App is a comprehensive health and wellness application designed to help users achieve their fitness goals through intelligent tracking, personalized recommendations, and detailed analytics. This mobile-first application was built to provide a seamless experience across iOS and Android platforms while maintaining feature parity and performance consistency.
+    shortDescription: "A mobile-first fitness application built as a personal project to combine my interest in fitness with app development",
+    fullDescription: `The Fitness Tracker App started as a personal project born from my own fitness journey. I wanted to create an app that tracked workouts the way I actually wanted to use it, while also challenging myself to build a cross-platform mobile application.
 
-At its core, the application features an extensive exercise library with over 500 exercises, complete with video demonstrations, proper form guidance, and muscle group targeting information. Users can create custom workout routines or choose from pre-built programs designed by certified fitness professionals. The workout logging system captures detailed metrics including sets, reps, weight, rest times, and perceived exertion.
+The app features an extensive exercise library with over 500 exercises, complete with form guidance and muscle group targeting information. Building this database and the UI to navigate it was a significant undertaking that taught me a lot about data organization and mobile UX.
 
-The progress tracking system provides users with comprehensive insights into their fitness journey. Interactive charts display strength progression over time, body measurements, and workout frequency patterns. The AI-powered analytics engine identifies trends and plateaus, offering personalized suggestions to optimize training. Integration with popular fitness wearables allows for automatic heart rate and calorie tracking during workouts.
+I implemented interactive charts to display strength progression, body measurements, and workout frequency patterns. Working with Chart.js and optimizing for mobile performance was a fun challenge. The AI-powered analytics feature that identifies trends and suggests improvements was my favorite part to build.
 
-Social features enable users to connect with friends, share achievements, and participate in community challenges. The leaderboard system gamifies fitness activities, while the accountability partner feature allows users to pair up for mutual motivation. Push notifications provide timely reminders for scheduled workouts and celebrate milestone achievements.`,
+Social features let users connect with friends and participate in challenges. Building the real-time leaderboard system and push notification infrastructure rounded out the project as a comprehensive learning experience in mobile development.`,
     category: "App Development",
     color: "#4A90E2",
     technologies: ["React Native", "Firebase", "Chart.js", "Redux", "Node.js", "TensorFlow Lite"],
-    challenges: [
-      "Synchronizing offline workout data when connectivity is restored",
-      "Processing and visualizing large datasets of historical fitness data",
-      "Integrating with multiple third-party fitness device APIs",
-      "Optimizing battery usage for background tracking features"
+    screens: [
+      {
+        image: "/images/project-fitness.jpg",
+        title: "Dashboard Overview",
+        description: "The main dashboard provides a quick overview of today's workout plan, weekly activity summary, and progress toward fitness goals. The circular progress indicators show completion rates for different fitness metrics."
+      },
+      {
+        image: "/images/fitness-workout.jpg",
+        title: "Workout Session",
+        description: "The active workout screen displays the current exercise with set/rep tracking, rest timers, and quick access to exercise instructions. Users can log weights, mark sets complete, and add notes for each exercise."
+      },
+      {
+        image: "/images/fitness-stats.jpg",
+        title: "Progress Analytics",
+        description: "Detailed analytics charts show strength progression over time, workout consistency patterns, and body measurement trends. The AI engine analyzes this data to provide personalized training recommendations."
+      }
     ],
-    solutions: [
-      "Implemented a robust offline-first architecture with conflict resolution",
-      "Used lazy loading and data virtualization for performance optimization",
-      "Created a unified adapter layer for standardized device integration",
-      "Employed efficient background task scheduling and geofencing"
-    ],
-    outcomes: [
-      "Achieved 4.8-star rating on both App Store and Google Play",
-      "Grew user base to 50,000+ active monthly users",
-      "Users reported 35% improvement in workout consistency",
-      "Featured in 'Health & Fitness' app spotlight"
+    features: [
+      "Extensive exercise library with video demonstrations",
+      "Custom workout routine builder with templates",
+      "Progress tracking with interactive charts",
+      "AI-powered training recommendations",
+      "Social features with friend challenges and leaderboards"
     ]
   },
   {
     id: "portfolio-builder",
     title: "Portfolio Builder",
-    shortDescription: "Drag-and-drop portfolio creator with customizable templates and themes",
-    fullDescription: `The Portfolio Builder is an innovative web application that empowers creative professionals to showcase their work without any coding knowledge. This intuitive platform combines the power of a content management system with the flexibility of a design tool, allowing users to create stunning, professional portfolios in minutes.
+    shortDescription: "A drag-and-drop portfolio creator developed as a fun project to explore visual editing interfaces and real-time collaboration",
+    fullDescription: `The Portfolio Builder emerged from my fascination with visual editing tools. I wanted to understand how platforms like Webflow and Framer work under the hood, so I decided to build a simplified version focused specifically on portfolio creation.
 
-The drag-and-drop interface was meticulously designed to feel natural and responsive. Users can arrange content blocks, resize images, and customize layouts with simple mouse gestures. The real-time preview feature shows changes instantly, eliminating the guesswork from the design process. Smart guides and snap-to-grid functionality help maintain visual alignment and consistency throughout the portfolio.
+The drag-and-drop interface was the most challenging and rewarding part to build. I created a custom system that feels natural and responsive, with real-time preview updates. Implementing smart guides and snap-to-grid functionality helped maintain visual alignment throughout the editing process.
 
-The template system offers a diverse collection of professionally designed layouts suitable for photographers, designers, developers, artists, and other creative professionals. Each template is fully customizable, with options to modify colors, fonts, spacing, and component styles. The theme engine supports both light and dark modes, with automatic color palette generation based on brand colors.
+The template system offers professionally designed layouts that are fully customizable. Building the theme engine that supports light/dark modes with automatic color palette generation based on brand colors was a particularly interesting challenge involving color theory and accessibility considerations.
 
-Advanced features include custom domain support, SEO optimization tools, and analytics integration. The built-in image optimization system automatically compresses and serves images in next-gen formats, ensuring fast load times without sacrificing quality. Social media integration allows for easy sharing and automatic updates when portfolio content changes.`,
+I also implemented custom domain support, SEO optimization tools, and image optimization that automatically serves images in next-gen formats. This project significantly expanded my understanding of static site generation and content delivery optimization.`,
     category: "UI/UX Design",
     color: "#FF69B4",
     technologies: ["Next.js", "Tailwind CSS", "Framer Motion", "Prisma", "PostgreSQL", "Cloudinary"],
-    challenges: [
-      "Creating an intuitive drag-and-drop system that works across devices",
-      "Generating performant, SEO-friendly static sites from dynamic content",
-      "Handling complex state management for real-time collaborative editing",
-      "Ensuring consistent rendering across different browsers and devices"
+    screens: [
+      {
+        image: "/images/project-portfolio.jpg",
+        title: "Template Gallery",
+        description: "The template selection screen showcases professionally designed portfolio layouts. Each template is previewed with sample content, and users can filter by style (minimal, creative, professional) or profession (developer, designer, photographer)."
+      },
+      {
+        image: "/images/portfolio-editor.jpg",
+        title: "Visual Editor",
+        description: "The main editing interface features a drag-and-drop canvas with a component sidebar. Users can arrange sections, customize content, and see changes in real-time. Smart guides appear when aligning elements."
+      },
+      {
+        image: "/images/portfolio-templates.jpg",
+        title: "Theme Customization",
+        description: "The theme panel allows complete visual customization including color schemes, typography choices, and spacing settings. The auto-generate feature creates harmonious color palettes from a single brand color input."
+      }
     ],
-    solutions: [
-      "Built custom drag-and-drop engine with touch support and accessibility",
-      "Implemented incremental static regeneration for optimal performance",
-      "Used operational transformation for conflict-free real-time editing",
-      "Employed progressive enhancement and cross-browser testing"
-    ],
-    outcomes: [
-      "Over 15,000 portfolios created within first six months",
-      "Average time to create portfolio reduced to under 30 minutes",
-      "95% user satisfaction rate in feedback surveys",
-      "Portfolios achieve average PageSpeed score of 95+"
+    features: [
+      "Intuitive drag-and-drop visual editor",
+      "Professional template library with full customization",
+      "Automatic image optimization and next-gen formats",
+      "Custom domain support with SSL",
+      "Built-in SEO optimization tools"
     ]
   },
   {
     id: "task-management",
     title: "Task Management System",
-    shortDescription: "Collaborative project management tool with real-time updates and team features",
-    fullDescription: `The Task Management System is a powerful collaborative platform designed to streamline project workflows and enhance team productivity. Built with modern technologies and real-time capabilities, this application provides teams with the tools they need to plan, execute, and track projects of any scale effectively.
+    shortDescription: "A collaborative project management tool built as a fun project to explore real-time synchronization and team collaboration features",
+    fullDescription: `This Task Management System was developed as a personal project to dive deep into real-time collaboration technologies. I was curious about how tools like Notion and Linear handle concurrent editing, so I set out to build my own simplified version.
 
-The project organization system supports multiple methodologies including Kanban boards, sprint-based workflows, and traditional task lists. Teams can customize their workspace to match their preferred working style, with flexible views that can be switched instantly. The hierarchical structure supports projects, milestones, tasks, and subtasks, allowing for detailed breakdown of complex initiatives.
+The system supports multiple project methodologies including Kanban boards, sprint-based workflows, and traditional task lists. Building the flexible view system that can switch between these formats instantly was a great exercise in state management and UI architecture.
 
-Real-time collaboration features enable teams to work together seamlessly regardless of location. Changes are synchronized instantly across all connected clients, with presence indicators showing who is currently viewing or editing each item. The comment system supports threaded discussions, file attachments, and @mentions, keeping all project communication in context.
+Real-time collaboration was the core technical challenge. I implemented instant synchronization across all connected users with presence indicators showing who is viewing or editing each item. The conflict resolution system handles concurrent edits gracefully without data loss.
 
-Advanced features include time tracking, workload management, and automated workflows. The reporting dashboard provides insights into team velocity, project progress, and individual contributions. Integration with popular tools like GitHub, Slack, and Google Workspace ensures the system fits naturally into existing workflows.`,
+Advanced features like time tracking, workload visualization, and automated workflows rounded out the project. Building the integration layer for GitHub, Slack, and Google Workspace taught me a lot about API design and third-party service integration patterns.`,
     category: "Web Development",
     color: "#7ED321",
     technologies: ["Vue.js", "Express", "PostgreSQL", "Socket.io", "Redis", "Docker", "GraphQL"],
-    challenges: [
-      "Maintaining data consistency with real-time multi-user editing",
-      "Scaling WebSocket connections for large team deployments",
-      "Implementing complex permission systems for enterprise clients",
-      "Creating a flexible system that adapts to various project methodologies"
+    screens: [
+      {
+        image: "/images/project-tasks.jpg",
+        title: "Project Overview",
+        description: "The project dashboard displays key metrics, recent activity, and quick access to tasks. The sidebar shows project hierarchy with milestones and task groups for easy navigation."
+      },
+      {
+        image: "/images/tasks-kanban.jpg",
+        title: "Kanban Board",
+        description: "The Kanban view allows drag-and-drop task organization across customizable columns. Cards show assignees, due dates, and priority labels. Real-time updates sync changes instantly across all team members."
+      },
+      {
+        image: "/images/tasks-timeline.jpg",
+        title: "Timeline View",
+        description: "The Gantt-style timeline displays task dependencies and scheduling. Users can drag to adjust dates, link dependent tasks, and visualize the critical path. Milestones mark key project checkpoints."
+      }
     ],
-    solutions: [
-      "Implemented CRDT-based conflict resolution for concurrent edits",
-      "Used Redis Pub/Sub for distributed WebSocket handling",
-      "Built role-based access control with granular permissions",
-      "Developed a modular architecture allowing methodology plugins"
-    ],
-    outcomes: [
-      "Deployed to 200+ enterprise teams worldwide",
-      "Reduced project delivery times by 25% on average",
-      "Achieved 99.99% uptime over the past year",
-      "Processing over 1 million real-time updates daily"
+    features: [
+      "Multiple view modes: Kanban, list, timeline, and calendar",
+      "Real-time collaboration with presence indicators",
+      "Time tracking and workload management",
+      "Automated workflows and recurring tasks",
+      "Integration with GitHub, Slack, and Google Workspace"
     ]
   },
   {
     id: "weather-dashboard",
     title: "Weather Dashboard",
-    shortDescription: "Interactive weather visualization with forecasts and location-based data",
-    fullDescription: `The Weather Dashboard is an immersive weather visualization application that transforms meteorological data into beautiful, interactive 3D experiences. Moving beyond traditional weather apps, this project leverages WebGL and Three.js to create stunning visual representations of weather conditions that are both informative and engaging.
+    shortDescription: "An interactive 3D weather visualization built as a fun project to explore WebGL and Three.js capabilities",
+    fullDescription: `The Weather Dashboard was born from my desire to learn WebGL and Three.js while creating something visually impressive. Traditional weather apps present data in tables and simple charts - I wanted to transform meteorological data into an immersive 3D experience.
 
-The 3D visualization engine renders realistic weather conditions including rain, snow, fog, and sunshine. Users can explore weather patterns in an interactive globe view, with animated weather systems moving across continents. The day/night cycle is accurately represented, with atmospheric scattering effects creating realistic sunrise and sunset transitions.
+The 3D visualization engine renders realistic weather conditions including rain, snow, fog, and sunshine effects. Building the particle systems for precipitation and the shader-based atmospheric effects was incredibly rewarding. The interactive globe view shows animated weather systems moving across continents.
 
-Location-based features provide personalized weather information using the device's GPS capabilities. The smart notification system alerts users to significant weather changes, severe weather warnings, and optimal times for outdoor activities. Historical data visualization allows users to explore weather patterns over time, with animated playback of past weather events.
+Location-based features provide personalized weather using GPS, with smart notifications for significant weather changes. Working with multiple weather APIs and implementing a data aggregation layer that weights different sources based on historical accuracy was a fun algorithmic challenge.
 
-The forecasting system aggregates data from multiple weather services to provide accurate predictions up to 14 days ahead. Machine learning algorithms analyze historical accuracy to weight different data sources, continuously improving prediction reliability. The API also provides detailed agricultural weather data for farmers and outdoor enthusiasts.`,
+The historical data visualization lets users explore past weather patterns with animated playback. This project significantly expanded my 3D graphics skills and taught me a lot about performance optimization for complex visual effects.`,
     category: "3D Animation",
     color: "#4A90E2",
     technologies: ["Three.js", "React", "OpenWeather API", "D3.js", "WebGL", "GSAP", "Node.js"],
-    challenges: [
-      "Rendering complex 3D weather effects without impacting performance",
-      "Accurately representing global weather patterns on an interactive globe",
-      "Managing large datasets of historical weather information",
-      "Creating intuitive controls for 3D navigation on touch devices"
+    screens: [
+      {
+        image: "/images/project-weather.jpg",
+        title: "Current Conditions",
+        description: "The main view displays current weather with 3D animated effects matching conditions - rain particles, cloud formations, or sunshine rays. Temperature, humidity, and wind data appear as floating UI elements."
+      },
+      {
+        image: "/images/weather-globe.jpg",
+        title: "Global Weather Map",
+        description: "An interactive 3D globe shows worldwide weather patterns with animated cloud systems and precipitation. Users can rotate, zoom, and click any location to see local weather details."
+      },
+      {
+        image: "/images/weather-forecast.jpg",
+        title: "Extended Forecast",
+        description: "The 14-day forecast view presents daily predictions with temperature graphs, precipitation probability, and condition icons. Historical accuracy indicators show how reliable predictions are for each timeframe."
+      }
     ],
-    solutions: [
-      "Implemented level-of-detail rendering and efficient particle systems",
-      "Used custom shaders for atmospheric effects and weather visualization",
-      "Employed time-series databases and data aggregation strategies",
-      "Designed gesture-based controls with physics-based interactions"
-    ],
-    outcomes: [
-      "Featured in WebGL design galleries and showcases",
-      "Maintains 60fps performance on mid-range devices",
-      "Processes weather data for 200,000+ global locations",
-      "Weather prediction accuracy improved by 15% through ML"
+    features: [
+      "Immersive 3D weather visualizations with WebGL",
+      "Interactive globe with global weather patterns",
+      "Location-based weather with smart notifications",
+      "14-day forecast with multiple data sources",
+      "Historical weather data exploration with playback"
     ]
   },
   {
     id: "social-media-analytics",
     title: "Social Media Analytics",
-    shortDescription: "Comprehensive analytics dashboard for tracking social media performance",
-    fullDescription: `The Social Media Analytics platform is an enterprise-grade solution designed to help businesses understand and optimize their social media presence. By aggregating data from multiple social platforms and applying advanced analytics, this tool provides actionable insights that drive marketing strategy and improve engagement.
+    shortDescription: "A comprehensive analytics dashboard developed as a fun project to explore data visualization and natural language processing",
+    fullDescription: `The Social Media Analytics platform was built as a personal project to combine my interests in data visualization and machine learning. I wanted to create a unified dashboard that could aggregate metrics from multiple platforms and provide meaningful insights.
 
-The dashboard aggregates metrics from all major social platforms including Instagram, Twitter, Facebook, LinkedIn, TikTok, and YouTube. Real-time data synchronization ensures metrics are always current, with historical trending that reveals performance patterns over time. The unified interface eliminates the need to switch between platform-specific analytics tools.
+The dashboard pulls data from major social platforms through their APIs, presenting everything in a unified interface. Building the data normalization layer to handle different metric formats and API structures across platforms was an interesting architectural challenge.
 
-The sentiment analysis engine uses natural language processing to analyze comments, mentions, and messages, providing insights into audience perception and brand health. The system identifies trending topics, influential users, and emerging conversations relevant to your brand. Automated alerts notify teams of viral content, negative sentiment spikes, or unusual activity patterns.
+The sentiment analysis engine was the most exciting part to develop. Using NLP techniques to analyze comments and mentions, it provides insights into audience perception and identifies trending topics. Training the multilingual model to handle content in different languages pushed my machine learning skills.
 
-The competitive analysis module allows businesses to benchmark their performance against competitors and industry averages. The content recommendation engine analyzes top-performing posts to suggest optimal posting times, content types, and hashtag strategies. Detailed reporting capabilities support custom report generation with white-label options for agencies.`,
+The competitive benchmarking and content recommendation features round out the analytics suite. This project taught me a lot about handling large datasets, building efficient data pipelines, and creating intuitive visualizations for complex information.`,
     category: "UI/UX Design",
     color: "#FF69B4",
     technologies: ["Angular", "Python", "PostgreSQL", "TensorFlow", "FastAPI", "Apache Kafka", "Elasticsearch"],
-    challenges: [
-      "Processing millions of social media posts in near real-time",
-      "Building accurate sentiment analysis across multiple languages",
-      "Creating an intuitive interface for complex data visualization",
-      "Handling rate limits and API changes from social platforms"
+    screens: [
+      {
+        image: "/images/project-analytics.jpg",
+        title: "Analytics Overview",
+        description: "The main dashboard aggregates metrics from all connected social platforms. Key performance indicators, follower growth trends, and engagement rates are displayed with interactive charts and comparison tools."
+      },
+      {
+        image: "/images/analytics-dashboard.jpg",
+        title: "Engagement Metrics",
+        description: "Detailed engagement analytics break down likes, comments, shares, and saves by platform and content type. Heat maps show optimal posting times based on historical engagement patterns."
+      },
+      {
+        image: "/images/analytics-sentiment.jpg",
+        title: "Sentiment Analysis",
+        description: "The AI-powered sentiment view analyzes audience comments and mentions. Word clouds highlight frequently mentioned topics, while emotion charts track positive, negative, and neutral sentiment over time."
+      }
     ],
-    solutions: [
-      "Implemented stream processing architecture with Apache Kafka",
-      "Trained multilingual NLP models on diverse social media datasets",
-      "Conducted extensive user research for dashboard design",
-      "Built resilient API adapters with automatic fallback mechanisms"
-    ],
-    outcomes: [
-      "Analyzing 10+ million social posts daily across platforms",
-      "Sentiment analysis accuracy exceeds 85% across 12 languages",
-      "Reduced client reporting time by 80%",
-      "Serving 500+ enterprise clients with 99.5% uptime"
+    features: [
+      "Unified dashboard for all major social platforms",
+      "AI-powered sentiment analysis with multilingual support",
+      "Competitor benchmarking and comparison tools",
+      "Content performance analysis with recommendations",
+      "Automated reporting with customizable templates"
     ]
   }
 ]
