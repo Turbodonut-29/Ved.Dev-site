@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Ved | Developer & Designer',
+  title: 'Ved.Dev',
   description: 'Professional portfolio showcasing web development, 3D animations, and UI/UX design services',
   generator: 'v0.app',
   icons: {
